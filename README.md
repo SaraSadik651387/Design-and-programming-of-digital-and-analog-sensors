@@ -29,6 +29,7 @@ LEDs (Red, Green, Blue)
 Jumper Wires
 
 Breadboard
+
 ---
 
 ## **How the IR Sensor Works**
