@@ -1,6 +1,6 @@
-# Design-and-programming-of-digital-sensor
+# Design and programming of digital and analog sensors
 
-This project demonstrates how to use an **IR Sensor (Infrared Receiver)** with an **Arduino Uno** to decode signals from an **IR Remote Control** and control devices like LEDs based on the received commands.
+This project demonstrates how to use an IR Sensor (Infrared Receiver) with an Arduino Uno to decode signals from an IR Remote Control and control devices like LEDs based on the received commands. Additionally, it explores the use of an Analog Temperature Sensor (TMP36) to read and respond to temperature changes.
 
 ---
 
@@ -8,18 +8,27 @@ This project demonstrates how to use an **IR Sensor (Infrared Receiver)** with a
 
 The IR sensor receives signals from the remote control, decodes them, and allows the Arduino to interpret which button was pressed. Based on the received signal, specific actions (e.g., turning an LED ON or OFF) are executed.
 
+In the Analog Sensor project, the TMP36 temperature sensor measures the ambient temperature, and the Arduino interprets this data to control LEDs, providing a visual representation of the temperature range.
+
 ---
 
 ## **Components**
 
-1. **Arduino Uno**
-2. **IR Receiver**
-3. **IR Remote Control**
-4. **LED**
-5. **330Ω Resistor**
-6. **Jumper Wires**
-7. **Breadboard**
+Arduino Uno
 
+IR Receiver
+
+IR Remote Control
+
+TMP36 Temperature Sensor
+
+LEDs (Red, Green, Blue)
+
+330Ω Resistors
+
+Jumper Wires
+
+Breadboard
 ---
 
 ## **How the IR Sensor Works**
@@ -36,30 +45,24 @@ The IR sensor receives signals from the remote control, decodes them, and allows
 
 4. **Action Execution:**
    - Based on the decoded value, the Arduino executes predefined actions like turning an LED ON or OFF.
+  
+## **How the TMP36 Temperature Sensor Works**
+1.**Signal Generation:**
+   -The TMP36 outputs a voltage proportional to the ambient temperature.
+   -The Arduino reads this voltage as an analog input.
 
----
+2.**Temperature Conversion:**
 
+The analog voltage is converted to a temperature in Celsius using a mathematical formula.
 
-### **Connections for the IR Sensor:**
-| IR Sensor Pin   | Arduino Pin   |
-|------------------|---------------|
-| **VCC**          | **5V**        |
-| **GND**          | **GND**       |
-| **OUT**          | **D3**        |
+3.**LED Control:**
 
----
-
-## **Code Explanation**
-
-- **`IRrecv`**: Initializes the receiver on the specified pin.
-- **`decode_results`**: Holds the data received from the remote.
-- **`IrReceiver.decode()`**: Decodes the signal from the remote.
-- **`decodedRawData`**: Provides the raw data for the pressed button.
+LEDs are turned ON or OFF based on the temperature range.
 
 ---
 
 ## **How to Use**
-
+## **IR Sensor Project**
 1. **Set Up the Circuit:**
    - Connect the **IR Sensor** as shown in the circuit diagram.
    - Connect the LED to pin **D5** with a 330Ω resistor.
@@ -73,6 +76,24 @@ The IR sensor receives signals from the remote control, decodes them, and allows
      - The **decoded value** for the button.
      - The LED turning **ON** or **OFF** based on the button pressed.
 
+## **TMP36 Project**
+1.**Set Up the Circuit:**
+
+   -Connect the TMP36 Sensor and LEDs as shown in the circuit diagram.
+   -Use 330Ω resistors with each LED.
+
+2.**Upload the Code:**
+
+Use the provided Arduino sketch to upload the program.
+
+3.**Test the Setup:**
+
+-Observe the LEDs turning ON or OFF based on the temperature:
+   -Below 40°C: All LEDs OFF.
+   -40-50°C: Red LED ON.
+   -50-60°C: Red and Blue LEDs ON.
+   -60°C and Above: All LEDs ON.
+   
 ---
 
 ## **Code**
@@ -111,4 +132,51 @@ void loop() {
     }
     IrReceiver.resume(); // Ready for the next value
   }
+}
+```
+##**TMP36 Temperature Sensor Code**
+```cpp
+int baselineTemp = 40;
+int celsius = 0;
+int fahrenheit = 0;
+
+void setup()
+{
+  pinMode(A0, INPUT);
+  Serial.begin(9600);
+
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+}
+
+void loop()
+{
+  celsius = map(((analogRead(A0) - 20) * 3.04), 0, 1023, -40, 125);
+  fahrenheit = ((celsius * 9) / 5 + 32);
+
+  Serial.print(celsius);
+  Serial.print(" C, ");
+  Serial.print(fahrenheit);
+  Serial.println(" F");
+
+  if (celsius < baselineTemp) {
+    digitalWrite(2, LOW);
+    digitalWrite(3, LOW);
+    digitalWrite(4, LOW);
+  } else if (celsius >= baselineTemp && celsius < baselineTemp + 10) {
+    digitalWrite(2, HIGH);
+    digitalWrite(3, LOW);
+    digitalWrite(4, LOW);
+  } else if (celsius >= baselineTemp + 10 && celsius < baselineTemp + 20) {
+    digitalWrite(2, HIGH);
+    digitalWrite(3, HIGH);
+    digitalWrite(4, LOW);
+  } else {
+    digitalWrite(2, HIGH);
+    digitalWrite(3, HIGH);
+    digitalWrite(4, HIGH);
+  }
+
+  delay(1000); 
 }
