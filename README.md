@@ -49,7 +49,9 @@ Breadboard
   
 ## **How the TMP36 Temperature Sensor Works**
 1.**Signal Generation:**
+
    -The TMP36 outputs a voltage proportional to the ambient temperature.
+   
    -The Arduino reads this voltage as an analog input.
 
 2.**Temperature Conversion:**
