@@ -4,7 +4,7 @@ This project demonstrates how to use an IR Sensor (Infrared Receiver) with an Ar
 
 ---
 
-## **Overview**
+## Overview
 
 The IR sensor receives signals from the remote control, decodes them, and allows the Arduino to interpret which button was pressed. Based on the received signal, specific actions (e.g., turning an LED ON or OFF) are executed.
 
@@ -12,27 +12,20 @@ In the Analog Sensor project, the TMP36 temperature sensor measures the ambient 
 
 ---
 
-## **Components**
+## Components
 
-Arduino Uno
-
-IR Receiver
-
-IR Remote Control
-
-TMP36 Temperature Sensor
-
-LEDs (Red, Green, Blue)
-
-330Ω Resistors
-
-Jumper Wires
-
-Breadboard
+- Arduino Uno
+- IR Receiver
+- IR Remote Control
+- TMP36 Temperature Sensor
+- LEDs (Red, Green, Blue)
+- 330Ω Resistors
+- Jumper Wires
+- Breadboard
 
 ---
 
-## **How the IR Sensor Works**
+## How the IR Sensor Works
 
 1. **Signal Transmission:**
    - The **IR Remote Control** emits infrared light when a button is pressed.
@@ -46,60 +39,61 @@ Breadboard
 
 4. **Action Execution:**
    - Based on the decoded value, the Arduino executes predefined actions like turning an LED ON or OFF.
-  
-## **How the TMP36 Temperature Sensor Works**
-1.**Signal Generation:**
-
-   -The TMP36 outputs a voltage proportional to the ambient temperature.
-   
-   -The Arduino reads this voltage as an analog input.
-
-2.**Temperature Conversion:**
-
-The analog voltage is converted to a temperature in Celsius using a mathematical formula.
-
-3.**LED Control:**
-
-LEDs are turned ON or OFF based on the temperature range.
 
 ---
 
-## **How to Use**
-## **IR Sensor Project**
+## How the TMP36 Temperature Sensor Works
+
+1. **Signal Generation:**
+   - The TMP36 outputs a voltage proportional to the ambient temperature.
+   - The Arduino reads this voltage as an analog input.
+
+2. **Temperature Conversion:**
+   - The analog voltage is converted to a temperature in Celsius using a mathematical formula.
+
+3. **LED Control:**
+   - LEDs are turned ON or OFF based on the temperature range.
+
+---
+
+## How to Use
+
+### IR Sensor Project
+
 1. **Set Up the Circuit:**
-   - Connect the **IR Sensor** as shown in the circuit diagram.
-   - Connect the LED to pin **D5** with a 330Ω resistor.
+   - Connect the IR Sensor as shown in the circuit diagram.
+   - Connect the LED to pin D5 with a 330Ω resistor.
 
 2. **Upload the Code:**
    - Use the provided Arduino sketch to upload the program.
 
 3. **Test the Setup:**
-   - Open the **Serial Monitor**.
+   - Open the Serial Monitor.
    - Press a button on the IR Remote and observe:
-     - The **decoded value** for the button.
-     - The LED turning **ON** or **OFF** based on the button pressed.
+     - The decoded value for the button.
+     - The LED turning ON or OFF based on the button pressed.
 
-## **TMP36 Project**
-1.**Set Up the Circuit:**
+### TMP36 Project
 
-   -Connect the TMP36 Sensor and LEDs as shown in the circuit diagram.
-   -Use 330Ω resistors with each LED.
+1. **Set Up the Circuit:**
+   - Connect the TMP36 Sensor and LEDs as shown in the circuit diagram.
+   - Use 330Ω resistors with each LED.
 
-2.**Upload the Code:**
+2. **Upload the Code:**
+   - Use the provided Arduino sketch to upload the program.
 
-Use the provided Arduino sketch to upload the program.
+3. **Test the Setup:**
+   - Observe the LEDs turning ON or OFF based on the temperature:
+     - Below 40°C: All LEDs OFF.
+     - 40-50°C: Red LED ON.
+     - 50-60°C: Red and Blue LEDs ON.
+     - 60°C and Above: All LEDs ON.
 
-3.**Test the Setup:**
-
--Observe the LEDs turning ON or OFF based on the temperature:
-   -Below 40°C: All LEDs OFF.
-   -40-50°C: Red LED ON.
-   -50-60°C: Red and Blue LEDs ON.
-   -60°C and Above: All LEDs ON.
-   
 ---
 
-## **Code**
+## Code
+
+### IR Sensor Code
 
 ```cpp
 #include <IRremote.hpp>
