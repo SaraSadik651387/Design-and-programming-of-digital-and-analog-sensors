@@ -72,6 +72,9 @@ In the Analog Sensor project, the TMP36 temperature sensor measures the ambient 
    - Press a button on the IR Remote and observe:
      - The decoded value for the button.
      - The LED turning ON or OFF based on the button pressed.
+       
+![Image](https://github.com/user-attachments/assets/22240af1-3014-4ab6-ac48-98fbfa245f59)
+
 
 ### TMP36 Project
 
@@ -88,6 +91,8 @@ In the Analog Sensor project, the TMP36 temperature sensor measures the ambient 
      - 40-50°C: Red LED ON.
      - 50-60°C: Red and Blue LEDs ON.
      - 60°C and Above: All LEDs ON.
+
+![Image](https://github.com/user-attachments/assets/1f080ddd-946e-432e-9a18-0171f08a3bc8)
 
 ---
 
